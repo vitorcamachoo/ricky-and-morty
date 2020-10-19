@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org/) project to test react-query library integration with axios and graphql-request libraries.
+This is a [Next.js](https://nextjs.org/) project to test `react-query` library integration with `axios` and `graphql-request` libraries.
 
 ## Getting Started
 
