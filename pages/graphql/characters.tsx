@@ -45,8 +45,8 @@ const Characters = () => {
               {isFetchingMore
                 ? 'Loading more...'
                 : canFetchMore
-                  ? 'Load More'
-                  : 'Nothing more to load'}
+                ? 'Load More'
+                : 'Nothing more to load'}
             </button>
           </div>
         </>
