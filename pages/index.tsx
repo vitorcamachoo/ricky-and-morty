@@ -1,4 +1,4 @@
-import Episodes from "./rest/episodes"
+import Episodes from './rest/episodes'
 
 const Home = () => <Episodes />
 

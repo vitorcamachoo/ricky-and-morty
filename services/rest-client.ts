@@ -5,7 +5,7 @@ const client = axios.create({
 })
 
 export class Api {
-  static get(url: string) {
+  static get(url: string): any {
     try {
       return async (config?: AxiosRequestConfig) =>
         (await client.get(url, config)).data

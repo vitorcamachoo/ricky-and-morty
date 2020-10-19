@@ -5,9 +5,9 @@ const client = new GraphQLClient(
 )
 
 export class Api {
-  static async request(query, variables) {
+  static request(query) {
     try {
-      return client.request(query, variables)
+      return (variables) => client.request(query, variables)
     } catch (error) {
       return error
     }
