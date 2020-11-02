@@ -1,5 +1,5 @@
 {
-  "name": "github-jobs",
+  "name": "ricky-and-morty-react-query",
   "scripts": {
     "dev": "yarn next dev",
     "test": "yarn jest",
@@ -10,32 +10,36 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
-    "@testing-library/jest-dom": "^5.11.4",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
+    "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/react": "^11.1.0",
-    "@types/jest": "^26.0.14",
+    "@types/jest": "^26.0.15",
     "@types/react-query": "^1.1.2",
-    "@typescript-eslint/eslint-plugin": "^4.4.1",
-    "@typescript-eslint/parser": "^4.4.1",
-    "axios": "^0.20.0",
-    "eslint": "^7.11.0",
-    "eslint-config-prettier": "^6.13.0",
-    "eslint-plugin-react": "^7.21.4",
-    "graphql": "^15.3.0",
-    "graphql-request": "^3.2.0",
-    "jest": "^26.6.0",
+    "@typescript-eslint/eslint-plugin": "^4.6.0",
+    "@typescript-eslint/parser": "^4.6.0",
+    "axios": "^0.21.0",
+    "eslint": "^7.12.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-react": "^7.21.5",
+    "graphql": "^15.4.0",
+    "graphql-request": "^3.3.0",
+    "jest": "^26.6.1",
     "jest-watch-typeahead": "^0.6.1",
-    "next": "^9.5.4",
+    "next": "^10.0.0",
     "prettier": "^2.1.2",
     "query-string": "^6.13.5",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
-    "react-query": "^2.23.1",
-    "react-query-devtools": "^2.6.0",
-    "ts-jest": "^26.4.1"
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-query": "^2.25.2",
+    "react-query-devtools": "^2.6.1",
+    "react-simple-infinite-loading": "^1.1.0",
+    "react-virtualized": "^9.22.2",
+    "ts-jest": "^26.4.3"
   },
   "devDependencies": {
-    "@types/node": "^14.11.8",
-    "@types/react": "^16.9.51",
-    "typescript": "^4.0.3"
+    "@types/node": "^14.14.6",
+    "@types/react": "^16.9.55",
+    "typescript": "^4.0.5"
   }
 }

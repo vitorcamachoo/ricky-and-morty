@@ -17,6 +17,12 @@ export const getCharacters = Api.request(
         results {
           id
           name
+          image
+          species
+          status
+          location {
+            name
+          }
         }
       }
     }
