@@ -1,50 +1,44 @@
-import { FC, memo, useState } from 'react'
-import { Button, Grid, TextField } from '@material-ui/core'
+import React, { FC, memo } from 'react'
+import { createStyles, debounce, IconButton, InputBase, makeStyles, Paper, Theme } from '@material-ui/core'
+import SearchIcon from '@material-ui/icons/Search';
 
 export interface SearchFieldProps {
   label: string
-  onSubmit: (filter: any) => void
+  onChange: (values: { [key: string]: string }) => void
 }
 
-const SearchField: FC<SearchFieldProps> = memo(({ label, onSubmit }) => {
-  const [filter, setFilter] = useState({})
-  const handleChange = (event) => {
-    const { name, value } = event.target
-    return setFilter({
-      ...filter,
-      [name]: value,
-    })
-  }
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      display: 'flex',
+    },
+    input: {
+      flex: 1,
+      marginLeft: theme.spacing(2),
+    },
+    iconButton: {
+      padding: theme.spacing(1),
+    },
+  }),
+);
+
+const SearchField: FC<SearchFieldProps> = memo(({ label, onChange }) => {
+  const classes = useStyles()
+  const handleChange = debounce(({ target: { name, value } }) => onChange({ [name]: value }), 500)
 
   return (
-    <Grid>
-      <Grid
-        container
-        xl={3}
-        lg={5}
-        md={6}
-        sm={10}
-        xs={12}
-        item
-        justify="space-around"
-      >
-        <TextField
-          size="small"
-          name="name"
-          label={label}
-          variant="outlined"
-          onChange={handleChange}
-        />
-        <Button
-          onClick={() => onSubmit(filter)}
-          size="small"
-          variant="contained"
-          color="primary"
-        >
-          Search
-        </Button>
-      </Grid>
-    </Grid>
+    <Paper component="form" className={classes.root}>
+      <InputBase
+        name="name"
+        placeholder={label}
+        className={classes.input}
+        inputProps={{ 'aria-label': label }}
+        onChange={handleChange}
+      />
+      <IconButton type="submit" className={classes.iconButton} aria-label="search">
+        <SearchIcon />
+      </IconButton>
+    </Paper>
   )
 })
 

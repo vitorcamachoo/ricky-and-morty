@@ -9,14 +9,18 @@ module.exports = {
     graphql: GRAPH,
   },
 
+  images: {
+    domains: ['rickandmortyapi.com'],
+  },
+
   async rewrites() {
     return [
       {
-        source: '/api/:path*',
+        source: '/api/rest/:path*',
         destination: `${REST}/:path*`,
       },
       {
-        source: '/graphql',
+        source: '/api/graphql',
         destination: `${GRAPH}`,
       },
     ]

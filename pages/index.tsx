@@ -1,5 +1,4 @@
-import Episodes from './rest/episodes'
+import Rest from './rest'
 
-const Home = () => <Episodes />
-
-export default Home
+const App = () => <Rest />
+export default App

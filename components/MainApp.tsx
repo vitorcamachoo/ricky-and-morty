@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import { FC } from 'react'
+import { useRouter } from 'next/router'
 import {
   AppBar,
   Button,
@@ -6,7 +8,6 @@ import {
   makeStyles,
   Theme,
   Toolbar,
-  Typography,
 } from '@material-ui/core'
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -16,46 +17,42 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
-const Characters = ({ children }) => {
+const MainApp: FC = ({ children }) => {
   const classes = useStyles()
+  const router = useRouter()
+  const routes = {
+    rest: "/rest",
+    graphql: "/graphql",
+  }
+
+  const isActive = (route, isDefault = false) => {
+    if (router.route === '/' && isDefault) return 'secondary'
+
+    return route === router.route
+      ? 'secondary'
+      : 'default'
+  }
+
 
   return (
     <>
-      <AppBar position="static">
-        <Grid container>
-          <Grid item xs={6}>
-            <Toolbar>
-              <Typography>Rest:</Typography>
-              <Link href="/rest/episodes">
-                <Button>Episodes</Button>
-              </Link>
-              <Link href="/rest/characters">
-                <Button>Characters</Button>
-              </Link>
-              <Link href="/rest/location">
-                <Button>Location</Button>
-              </Link>
-            </Toolbar>
-          </Grid>
-          <Grid item xs={6}>
-            <Toolbar>
-              <Typography>GraphQL:</Typography>
-              <Link href="/graphql/episodes">
-                <Button>Episodes</Button>
-              </Link>
-              <Link href="/graphql/characters">
-                <Button>Characters</Button>
-              </Link>
-              <Link href="/graphql/location">
-                <Button>Location</Button>
-              </Link>
-            </Toolbar>
-          </Grid>
+      <AppBar elevation={0} color="transparent" position="static">
+        <Grid container justify="flex-end">
+          <Toolbar>
+            <Link href={routes.rest} prefetch>
+              <Button color={isActive(routes.rest, true)}>Rest</Button>
+            </Link>
+            <Link href={routes.graphql} prefetch>
+              <Button color={isActive(routes.graphql)}>GraphQL</Button>
+            </Link>
+          </Toolbar>
         </Grid>
       </AppBar>
-      <div className={classes.content}>{children}</div>
+      <div className={classes.content}>
+        {children}
+      </div>
     </>
   )
 }
 
-export default Characters
+export default MainApp

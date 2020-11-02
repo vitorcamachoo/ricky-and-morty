@@ -1,7 +1,7 @@
 import { GraphQLClient } from 'graphql-request'
 
 const client = new GraphQLClient(
-  typeof window === 'undefined' ? process.env.graph! : '/graphql',
+  typeof window === 'undefined' ? process.env.graph! : '/api/graphql',
 )
 
 export class Api {

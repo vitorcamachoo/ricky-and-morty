@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios'
 
 const client = axios.create({
-  baseURL: typeof window === 'undefined' ? process.env.api : '/api',
+  baseURL: typeof window === 'undefined' ? process.env.api : '/api/rest',
 })
 
 export class Api {
