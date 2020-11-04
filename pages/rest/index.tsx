@@ -1,11 +1,13 @@
 import qs from 'query-string'
-import { useState } from 'react'
+import { FC, useState } from 'react'
+import { InferGetStaticPropsType } from 'next'
 import { getCharacters } from 'services/rest'
-import { useInfiniteQuery } from 'react-query'
+import { QueryCache, useInfiniteQuery } from 'react-query'
 import SearchField from 'components/SearchField'
 import CharacterList from 'components/CharacterList'
 import Character, { CharacterProps } from 'components/Character'
 import { Grid, makeStyles, Theme } from '@material-ui/core'
+import { dehydrate } from 'react-query/hydration'
 
 const useStyles = makeStyles((theme: Theme) => ({
   search: {
@@ -13,20 +15,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }))
 
-const Characters = () => {
+const Characters: FC<InferGetStaticPropsType<typeof getStaticProps>> = () => {
   const classes = useStyles()
   const [filter, setFilter] = useState({ page: 1 })
   const charactersResult = useInfiniteQuery(
     ['characters', filter],
-    (_, params: any, cursor: string) =>
-      getCharacters({
-        params:
-          typeof cursor === 'string'
-            ? qs.parse(new URL(cursor).search)
-            : params,
-      }),
+    (_, params: any, cursor: any) => getCharacters({ ...params, ...cursor }),
     {
-      getFetchMore: ({ info }) => info.next,
+      getFetchMore: ({ info }) => info.next && qs.parse(new URL(info.next).search),
     },
   )
 
@@ -47,6 +43,20 @@ const Characters = () => {
       ) : null}
     </Grid>
   )
+}
+
+export async function getStaticProps() {
+  const queryCache = new QueryCache()
+
+  await queryCache.prefetchQuery(['characters', { page: 1 }], getCharacters)
+  await queryCache.prefetchQuery(['characters', { page: 2 }], getCharacters)
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryCache),
+    },
+    revalidate: 1,
+  }
 }
 
 export default Characters

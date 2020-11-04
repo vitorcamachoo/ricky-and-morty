@@ -9,6 +9,7 @@ import {
   Theme,
   Toolbar,
 } from '@material-ui/core'
+import { useAuth } from 'hooks/firebase'
 
 const useStyles = makeStyles((theme: Theme) => ({
   content: {
@@ -18,6 +19,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }))
 
 const MainApp: FC = ({ children }) => {
+  const { user, signInWithGoogle, logout } = useAuth()
   const classes = useStyles()
   const router = useRouter()
   const routes = {
@@ -33,18 +35,22 @@ const MainApp: FC = ({ children }) => {
       : 'default'
   }
 
-
   return (
     <>
       <AppBar elevation={0} color="transparent" position="static">
         <Grid container justify="flex-end">
           <Toolbar>
-            <Link href={routes.rest} prefetch>
+            <Link href={routes.rest}>
               <Button color={isActive(routes.rest, true)}>Rest</Button>
             </Link>
-            <Link href={routes.graphql} prefetch>
+            <Link href={routes.graphql}>
               <Button color={isActive(routes.graphql)}>GraphQL</Button>
             </Link>
+            {
+              user
+                ? <Button onClick={logout}>Logout</Button>
+                : <Button onClick={signInWithGoogle}>Login</Button>
+            }
           </Toolbar>
         </Grid>
       </AppBar>

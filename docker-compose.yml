@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+  application:
+    build: .
+    env_file:
+      - .env.local
+    volumes:
+      - ./nginx/templates/:/etc/nginx/templates/
+      - ./nginx/logs/:/var/log/nginx/
+    environment:
+      - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
+      - API_DOMAIN=${API_DOMAIN}
+      - NGINX_PORT=${NGINX_PORT}
+    ports:
+      - ${NGINX_PORT}:80

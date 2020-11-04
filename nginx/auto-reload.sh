@@ -1,0 +1,2 @@
+echo "Starting server...";
+/docker-entrypoint.sh nginx -g "daemon off;" & inotifywait -e modify -mr --timefmt '%d/%m/%y %H:%M' --format '%T' /etc/nginx/templates/*.template | while read time; do /docker-entrypoint.sh nginx-debug -s reload; done
