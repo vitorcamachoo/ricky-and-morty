@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import Image from 'next/image'
 import { Card, Badge, CardContent, CardMedia, Grid, makeStyles, Theme, Typography } from '@material-ui/core'
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -42,12 +43,14 @@ const CharacterCard: FC<CharacterProps> = ({ name, image, location, species, sta
 
     return (
         <Card className={classes.root}>
-            <CardMedia style={{ flex: '2', width: '100%' }}>
-                <img
+            <CardMedia>
+                <Image
                     src={image}
                     alt={name}
-                    height="100%"
-                    width="100%"
+                    height={200}
+                    width={200}
+                    quality={1}
+                    priority={false}
                 />
             </CardMedia>
             <CardContent style={{ flex: '3' }}>
