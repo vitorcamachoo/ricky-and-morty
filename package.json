@@ -1,12 +1,24 @@
 {
   "name": "ricky-and-morty-react-query",
   "scripts": {
-    "dev": "yarn next dev",
-    "test": "yarn jest",
-    "build": "yarn next build",
-    "start": "yarn next start",
+    "dev": "next dev",
+    "test": "jest",
+    "build": "next build",
+    "export": "next export",
+    "start": "next start",
     "format": "prettier --write .",
     "lint": "eslint . --ext ts --ext tsx --ext js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "yarn lint --fix --cache",
+      "git add"
+    ]
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
@@ -22,6 +34,7 @@
     "eslint": "^7.12.1",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-react": "^7.21.5",
+    "firebase": "^8.0.0",
     "graphql": "^15.4.0",
     "graphql-request": "^3.3.0",
     "jest": "^26.6.1",
@@ -33,8 +46,6 @@
     "react-dom": "^17.0.1",
     "react-query": "^2.25.2",
     "react-query-devtools": "^2.6.1",
-    "react-simple-infinite-loading": "^1.1.0",
-    "react-virtualized": "^9.22.2",
     "ts-jest": "^26.4.3"
   },
   "devDependencies": {

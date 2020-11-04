@@ -1,0 +1,27 @@
+user nginx;
+worker_processes 1;
+ 
+events {
+  worker_connections  1024;
+}
+
+http {
+    server {
+        listen 80;
+        
+        location /api/rest {
+            rewrite /api/rest(.*) /api/$1  break;
+            proxy_pass https://${API_DOMAIN};
+        }
+
+        location /api/graphql {
+            rewrite /api/graphql(.*) /graphql/$1  break;
+            proxy_pass https://${API_DOMAIN};
+        }
+
+        location / {
+            root /var/www/out;
+            try_files $uri /$uri.html /rest.html;
+        }
+    }
+}

@@ -1,16 +1,9 @@
 import React from 'react'
 import { InfiniteQueryResult } from 'react-query'
 import { Button, Grid, makeStyles } from '@material-ui/core'
+import { ApiResponse } from 'services/rest-client'
 
-interface ApiResponse<T> {
-    results: T[]
-    info: {
-        count: number
-        next: URL
-        pages: number
-        prev: URL | null
-    }
-}
+
 
 export interface CharactersListProps<T> extends InfiniteQueryResult<ApiResponse<T>> {
     children: (character: T, index: number) => JSX.Element

@@ -1,0 +1,11 @@
+# Error log files
+lerna-debug.log
+yarn-error.log
+
+# Build folders
+**/build
+**/.next
+**/out
+
+# Dependencies
+**/node_modules

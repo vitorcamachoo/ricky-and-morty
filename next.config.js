@@ -1,27 +1,33 @@
-const {
-  REST = 'https://rickandmortyapi.com/api',
-  GRAPH = 'https://rickandmortyapi.com/graphql',
-} = process.env
+const { NEXT_PUBLIC_REST, NEXT_PUBLIC_GRAPH } = process.env
 
 module.exports = {
-  env: {
-    rest: REST,
-    graphql: GRAPH,
+  devIndicators: {
+    autoPrerender: true,
   },
 
   images: {
     domains: ['rickandmortyapi.com'],
   },
 
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/rest',
+        permanent: true,
+      },
+    ]
+  },
+
   async rewrites() {
     return [
       {
         source: '/api/rest/:path*',
-        destination: `${REST}/:path*`,
+        destination: `${NEXT_PUBLIC_REST}/:path*`,
       },
       {
         source: '/api/graphql',
-        destination: `${GRAPH}`,
+        destination: `${NEXT_PUBLIC_GRAPH}`,
       },
     ]
   },
